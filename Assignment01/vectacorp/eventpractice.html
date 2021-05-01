@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Event Practice</title>
+    <script src="scripts/jquery-3.6.0.min.js"></script>
+    <style>
+        .empty{
+            border:solid red 1px;
+        }
+        .valid{
+            border:solid green 1px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Assignment 1 - Steps 16-23: Practice with jQuery Events</h1>
+    <script>
+//STEP16
+    $('h1').after('<br><button class="16">Step 16</button>');
+    $('.16').click( function() {
+        alert('The 16 button was clicked!');
+    });
+//STEP17
+    $('.16').after('<br><button class="17">Step 17</button>');
+    $('.17').bind('click', function() {
+        alert('You clicked the 17 button.');
+    });
+//STEP18
+    $('.17').after('<br><button class="18">Step 18</button>');
+    $('.18').on('click', function() {
+        alert('Now the 18 button has been clicked');
+    });
+//STEP19
+    $('.18').after('<br><button class="19">Step 19B</button>').after('<br><button class="19">Step 19A</button>');
+    $('.19').on({
+        click: function() {
+            alert('One of the 19 buttons was clicked.');
+        }
+    })
+//STEP20
+    $('.19:last').after('<div class="addedDiv"><p>The Added Div - Step 20</p></div>');
+    $('.addedDiv').css('width', '400px').css('height', '400px').css('background-color', 'red').css('color', 'white');
+
+    //ALERTS ON EVENT
+    // $('.addedDiv').on({
+    //     mouseenter:  function() {
+    //     alert('The mouse entered the Added Div');
+    // },
+    //     mouseleave: function() {
+    //     alert('The mouse left the Added Div');
+    // },
+    //     click: function() {
+    //     alert('The mouse clicked in the Added Div');
+    // }
+    // });
+//STEP21
+    //---------SPAN TEXT CHANGES ON EVENT------------
+    // $('.addedDiv').after('<span><p>There is an added span here!</p></span>');
+
+    // $('.addedDiv').on({
+    //     mouseenter:  function() {
+    //     $('span').replaceWith('<span><p>The mouse entered the Added Div</p></span>');
+    // },
+    //     mouseleave: function() {
+    //     $('span').replaceWith('<span><p>The mouse left the Added Div</p></span>');
+    // },
+    //     click: function() {
+    //     $('span').replaceWith('<span><p>The mouse clicked in the Added Div</p></span>');
+    // }
+    // });
+//STEP22
+    $('span').after('<a href="http://modulemedia.com">Step 22 LINK</a>');
+    $('a').click(function(event) {
+        event.preventDefault();
+    });
+    $('a:visited').css('color', 'red');
+    $('a').click(function(event) {
+        alert(event.target.nodeName + ' triggered the event!');
+    });
+//STEP23
+    $('div:first').before('<div class="new"></div>');
+    $( window ).resize(function() {
+        $('.new').replaceWith('<div class="new"><p>STEP 23: The browser width is: ' + $( window ).width() + ' pixels and the browser height is: ' + $( window ).height() + ' pixels.</p></div>');
+    });
+//STEP24
+    $('.addedDiv').before('<label for="24">Step 24: <input id="24" type="text"></input></label>');
+    $('#24').on({
+        focus: function() {
+            $('input').css('background-color', ('#d3d3d3'));
+        },
+        blur: function() {
+            $('input').css('background-color', ('white'));
+        }
+    })
+//STEP25 Add a form tag within a web page complete with 2 input fields: one that collects name and a second that collects an email. Add a submit button. When the user submits the form, if any one of the two fields is left empty, display an alert box to the user indicating that the fields are required. Give the field that the user left empty a red border. If both fields have values in them, set their borders to green.
+
+$('#24').after('<br><br><form class="theForm"><fieldset><legend>The Form</legend><label for="name">Name: <input class="name" type="text"></input></label><br><label for="email">Email: <input type="email"></input></label><br><input type="submit"></input></fieldset></form>');
+    
+// $('theForm').on({
+//     submit: function(){
+       
+//         $('#theForm input[type="text"]').blur(function(){
+//             if(!$(this).val()){
+//             $(this).addClass('empty');
+//             alert('Please fill out all fields before submitting.');
+//             } else {
+//             $(this).removeClass('empty');
+//             }
+        
+    
+
+
+//         });
+//     },
+// })
+$(document).ready(function() {
+    $('#submit').click(function() {
+        if (!$('.name').val()) {
+            alert('Enter your name!');
+        }
+    })
+});
+    </script>
+</body>
+</html>
