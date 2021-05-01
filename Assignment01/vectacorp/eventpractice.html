@@ -8,10 +8,10 @@
     <script src="scripts/jquery-3.6.0.min.js"></script>
     <style>
         .empty{
-            border:solid red 1px;
+            border:solid red 3px;
         }
         .valid{
-            border:solid green 1px;
+            border:solid green 3px;
         }
     </style>
 </head>
@@ -86,7 +86,7 @@
         $('.new').replaceWith('<div class="new"><p>STEP 23: The browser width is: ' + $( window ).width() + ' pixels and the browser height is: ' + $( window ).height() + ' pixels.</p></div>');
     });
 //STEP24
-    $('.addedDiv').before('<label for="24">Step 24: <input id="24" type="text"></input></label>');
+    $('.addedDiv').before('<label for="24">Step 24: <input id="24"></input></label>');
     $('#24').on({
         focus: function() {
             $('input').css('background-color', ('#d3d3d3'));
@@ -95,34 +95,19 @@
             $('input').css('background-color', ('white'));
         }
     })
-//STEP25 Add a form tag within a web page complete with 2 input fields: one that collects name and a second that collects an email. Add a submit button. When the user submits the form, if any one of the two fields is left empty, display an alert box to the user indicating that the fields are required. Give the field that the user left empty a red border. If both fields have values in them, set their borders to green.
-
+//STEP25 
 $('#24').after('<br><br><form class="theForm"><fieldset><legend>The Form</legend><label for="name">Name: <input class="name" type="text"></input></label><br><label for="email">Email: <input type="email"></input></label><br><input type="submit"></input></fieldset></form>');
     
-// $('theForm').on({
-//     submit: function(){
-       
-//         $('#theForm input[type="text"]').blur(function(){
-//             if(!$(this).val()){
-//             $(this).addClass('empty');
-//             alert('Please fill out all fields before submitting.');
-//             } else {
-//             $(this).removeClass('empty');
-//             }
-        
-    
+    $('.theForm').on('submit', function(e) {
+        e.preventDefault();
+        if($(':text').val().length === 0){
+        alert('Please fill out all fields before submitting.');
+        $(this).addClass('empty');
+        } else if ($(':text').val().length > 0) {
+        $(this).addClass('valid');
+        };
+    });
 
-
-//         });
-//     },
-// })
-$(document).ready(function() {
-    $('#submit').click(function() {
-        if (!$('.name').val()) {
-            alert('Enter your name!');
-        }
-    })
-});
     </script>
 </body>
 </html>
